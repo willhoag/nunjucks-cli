@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 const { readFileSync, writeFileSync } = require('fs')
-const { resolve, basename, dirname } = require('path')
+const { resolve, basename, dirname, extname, join } = require('path')
 const nunjucks = require('nunjucks')
 const chokidar = require('chokidar')
 const glob = require('glob')
@@ -55,7 +55,12 @@ const { argv } = require('yargs')
 const inputDir = resolve(process.cwd(), argv.path) || ''
 const outputDir = argv.out || ''
 
-const context = argv._[1] ? JSON.parse(readFileSync(argv._[1], 'utf8')) : {}
+const context = argv._[1]
+  ? (extname(argv._[1]) === '.js'
+    ? require(join(process.cwd(), argv._[1]))
+    : JSON.parse(fs.readFileSync(argv._[1], 'utf8')))
+  : {}
+
 // Expose environment variables to render context
 context.env = process.env
 

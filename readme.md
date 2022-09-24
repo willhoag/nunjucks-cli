@@ -23,7 +23,7 @@ _For convenience, `process.env` object is added to the context as `env`._
 nunjucks foo.tpl data.json
 ```
 
-Compiles `foo.tpl` to `foo.html` with data from `data.json` (and variables from `process.env` as `env`).
+Compiles `foo.tpl` to `foo.html` with data from `data.js` or `data.json` (and variables from `process.env` as `env`).
 
 ```bash
 nunjucks **/*.tpl
@@ -81,7 +81,7 @@ nunjucks foo.tpl -p src -o dist -O nj.json
 Compiles `src/foo.tpl` to `dist/foo.html`, with `nj.json` as nunjucks environnement options.
 
 ```bash
-nunjucks *.tpl data.json -w -p src
+nunjucks *.tpl data.js -w -p src
 ```
 
-Compiles all `.tpl` files (except ones starting with `_`) in the `src` folder to the current working directory, with `data.json` as metadata, and keeps running in the background for files changes.
+Compiles all `.tpl` files (except ones starting with `_`) in the `src` folder to the current working directory, with `data.js` as metadata, and keeps running in the background for files changes.
